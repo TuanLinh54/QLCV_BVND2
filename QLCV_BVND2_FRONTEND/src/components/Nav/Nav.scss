@@ -1,31 +1,38 @@
-.nav-header{
-    .bg-header{
+.nav-header {
+    .bg-header {
         background-color: #20232a
     }
 
-    .navbar-brand{
+    .navbar-brand {
         color: #61dafb !important;
     }
 
-    .navbar-nav{
-        a, .nav-link{
+    .navbar-nav {
+
+        a,
+        .nav-link {
             color: white !important;
+
             &:hover {
                 color: #61dafb !important;
             }
         }
     }
 
-    .nav-link{
-        &.active{
+    .nav-link {
+        &.active {
             color: #61dafb !important;
         }
     }
 
-    .dropdown-menu
-    {   
-        a{
+    .navbar {
+        padding-left: 95px;
+        padding-right: 95px;
+    }
+
+    .dropdown-menu {
+        a {
             color: #212529 !important
-        }      
+        }
     }
 }

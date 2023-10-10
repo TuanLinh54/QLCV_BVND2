@@ -33,8 +33,8 @@ const Header = (props) => {
   if (user && user.isAuthenticated === true || location.pathname === '/') {
     return (
       <div className="nav-header">
-        <Navbar bg="header" expand='lg'>
-          <Container>
+        <Navbar bg="header" expand="lg" className="bg-body-tertiary">
+          <Container fluid>
             <Navbar.Brand href="#home">
               <img
                 src={logo}
@@ -47,13 +47,14 @@ const Header = (props) => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
+              <Nav className="me-auto mx-3">
                 <NavLink to="/s" className="nav-link">Trang chủ</NavLink>
 
                 {user && user.isAuthenticated === true && user.account.departmentId === 1 ?
                   <>
                     <NavLink to="/list_user" className="nav-link">Người dùng</NavLink>
                     <NavLink to="/list_doc" className="nav-link">Văn bản</NavLink>
+                    <NavLink to="/list_giamdoc" className="nav-link">Giám đốc</NavLink>
                   </>
                   :
                   <>
@@ -68,7 +69,6 @@ const Header = (props) => {
                   <>
                   </>
                 }
-
               </Nav>
               <Nav>
                 {user && user.isAuthenticated === true ?
@@ -88,6 +88,7 @@ const Header = (props) => {
                 }
 
               </Nav>
+
             </Navbar.Collapse>
           </Container>
         </Navbar>

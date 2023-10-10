@@ -62,7 +62,8 @@ function Index() {
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td><button className="title-doc">Khoa nội</button></td>
+                                                <td>
+                                                </td>
                                                 <td>Mô tả văn bản 1</td>
                                                 <td>10/10/2023 - 01/01/2024</td>
                                                 <td></td>
