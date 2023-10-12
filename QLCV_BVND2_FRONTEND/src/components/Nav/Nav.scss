@@ -1,27 +1,36 @@
 .nav-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+
     .bg-header {
-        background-color: #20232a
+        background-color: #e1e1e7
     }
 
     .navbar-brand {
-        color: #61dafb !important;
+        color: #34c149 !important;
+        font-family: Roboto, Helvetica, sans-serif;
     }
 
     .navbar-nav {
 
         a,
         .nav-link {
-            color: white !important;
+            color: rgb(0, 0, 0) !important;
+            font-family: Roboto, Helvetica, sans-serif;
 
             &:hover {
-                color: #61dafb !important;
+                color: #40d045 !important;
             }
         }
     }
 
     .nav-link {
         &.active {
-            color: #61dafb !important;
+            color: #f0fbf0 !important;
+            background-color: #757778;
+            border-radius: 5px;
         }
     }
 

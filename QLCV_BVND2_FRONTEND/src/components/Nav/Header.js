@@ -5,12 +5,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { UserContext } from '../../context/UserContext';
 import './Nav.scss';
-import logo from '../../assets/image/logo.png';
+import logo from '../../assets/image/logoND2.png';
 import { userLogout } from '../../services/userService';
 import { handleLoginRedux, handleLogoutRedux } from "../redux/actions/userAction";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+
 
 const Header = (props) => {
   const { user, logoutContext } = useContext(UserContext);
@@ -39,11 +40,11 @@ const Header = (props) => {
               <img
                 src={logo}
                 width="50"
-                height="25"
+                height="40"
                 className="d-inline-block align-top"
                 alt="React Bootstrap logo"
               />
-              <span className="navbar-brand">BVND2</span>
+              <span className="navbar-brand">Bệnh Viện Nhi Đồng 2</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -93,6 +94,7 @@ const Header = (props) => {
           </Container>
         </Navbar>
       </div>
+
 
     );
   }

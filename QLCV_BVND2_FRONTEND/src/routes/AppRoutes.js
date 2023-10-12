@@ -19,12 +19,14 @@ import ListGiamDoc from "../components/User/ListGiamDoc";
 import Header from "../components/Nav/Header";
 import { useEffect, useState } from "react";
 import _ from 'lodash';
+import Sidebar from "../components/Nav/Sidebar";
 
 const AppRoutes = (props) => {
   return (
     <>
       <Router>
         <Header />{" "}
+        {/* <Sidebar /> */}
         <Switch>
           <Route exact path="/">
             home{" "}

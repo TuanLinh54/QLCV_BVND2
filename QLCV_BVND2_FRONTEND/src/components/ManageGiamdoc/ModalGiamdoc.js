@@ -1,42 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import _, { update } from "lodash";
+import { toast } from 'react-toastify';
+import 'antd/dist/antd.css';
+import { DatePicker } from 'antd';
+import moment from 'moment'
+import './ModalGiamDoc.scss'
+
+const { RangePicker } = DatePicker;
 
 
 function ModalGiamdoc(props) {
 
-    const defaultUserData = {
-        fullName: '',
-        userName: '',
-        password: '',
-        phone: '',
-        email: '',
-        role: '',
-        position: '',
-        department: '',
-        image: '',
-
+    const listGiamdoc = {
+        docName: '',
+        docDes: '',
+        docTimeStart: '',
+        docTimeEnd: '',
+        docExpire: '',
+        docStatus: '',
+        docFile: []
     }
 
-    const validateInputDefault = {
-        fullName: true,
-        userName: true,
-        password: true,
-        phone: true,
-        email: true,
-        role: true,
-        position: true,
-        department: true,
-        validImage: true,
-    }
+    const [giamdocDataDefault, setGiamDocDataDefault] = useState(listGiamdoc);
+    const [dateRange, setDateRange] = useState([]);
 
-    const [userDataDefault, setuserDataDefault] = useState(defaultUserData);
 
     const handleApprove = () => {
         props.approveDocument();
         props.inactive();
     }
 
+
+    useEffect(() => {
+        setGiamDocDataDefault(props.setDataModalGiamDoc)
+    }, [props.setDataModalGiamDoc])
+
+    const handleOnchangeForm = (value, inputName) => {
+        //dùng hàm clonedeep để copy các phần tử (số nhiều) bên trong obj
+        let _giamdocDataDefault = _.cloneDeep(giamdocDataDefault);
+        _giamdocDataDefault[inputName] = value;
+        setGiamDocDataDefault(_giamdocDataDefault);
+    }
+
+    useEffect(() => {
+        if (props.active) {
+            setGiamDocDataDefault(props.setDataModalGiamDoc);
+
+            // Convert docTimeStart and docTimeEnd to moment objects
+            if (
+                props.setDataModalGiamDoc &&
+                props.setDataModalGiamDoc.docTimeStart &&
+                props.setDataModalGiamDoc.docTimeEnd
+            ) {
+                const startDate = moment(props.setDataModalGiamDoc.docTimeStart);
+                const endDate = moment(props.setDataModalGiamDoc.docTimeEnd);
+                setDateRange([startDate, endDate]);
+            }
+        }
+    }, [props.active, props.setDataModalGiamDoc]);
 
     return (
         <>
@@ -54,23 +77,57 @@ function ModalGiamdoc(props) {
                                 <div className="row d-flex justify-content-center form-group">
                                     <div className="mb-3 col-sm-4 form-group">
                                         <label htmlFor="fullName" className="form-label">Tên văn bản</label>
-                                        <input type="text" className="form-control" id="tit" name="title" required onChange={() => { }}
+                                        <input type="text" className="form-control" id="tit" name="title" required readOnly
+                                            value={giamdocDataDefault.docName}
+                                            onChange={(event) => { handleOnchangeForm(event.target.value, "docName") }}
                                         />
                                     </div>
                                     <div className="mb-3 col-sm-4 form-group">
                                         <label htmlFor="userName" className="form-label">Thời hạn xử lý</label>
-                                        <input disabled="" type="text" className="form-control" id="date" name="datehandle" />
+                                        <RangePicker
+                                            value={dateRange}
+                                            onChange={(dates) => {
+                                                if (dates) {
+                                                    setDateRange(dates);
+
+                                                    // Update docTimeStart and docTimeEnd in giamdocDataDefault
+                                                    const [startDate, endDate] = dates;
+                                                    setGiamDocDataDefault((prevData) => ({
+                                                        ...prevData,
+                                                        docTime: {
+                                                            docTimeStart: startDate ? startDate.format('YYYY-MM-DD') : '',
+                                                            docTimeEnd: endDate ? endDate.format('YYYY-MM-DD') : '',
+                                                        },
+                                                    }));
+                                                } else {
+                                                    toast.warning("Không thể xóa")
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="mb-3 col-sm-4 form-group">
+                                        <label htmlFor="userName" className="form-label">Bàn giao</label>
+                                        <input disabled="" type="text" className="form-control" id="date" name="datehandle"
+                                            value={giamdocDataDefault.docExpire}
+                                            onChange={(event) => { handleOnchangeForm(event.target.value, "docExpire") }}
+                                        />
                                     </div>
                                     <div className="mb-3 col-sm-4">
                                         <label htmlFor="userImage" className="form-label">Văn bản</label>
-                                        <input type="file" name="document" id="doc" className="form-control" accept="application/pdf" multiple />
+                                        <input type="file" name="document" id="doc" className="form-control" accept="application/pdf" multiple
+
+                                        />
                                     </div>
                                 </div>
 
                                 <div className="row mt-3 row mt-3 d-flex justify-content-center">
                                     <div className="mb-3 col-sm-12 form-group">
                                         <label htmlFor="des" className="form-label">Mô tả văn bản</label>
-                                        <textarea className="form-control" id="des" name="description" rows="4"></textarea>
+                                        <textarea className="form-control" id="des" name="description" rows="4"
+                                            value={giamdocDataDefault.docDes}
+                                            onChange={(event) => { handleOnchangeForm(event.target.value, "docDes") }}
+
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>
