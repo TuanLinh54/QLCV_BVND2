@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../../context/UserContext';
-import "./ListGiamDoc.scss";
-import ModalGiamdoc from '../ManageGiamdoc/ModalGiamdoc';
+import "./ListManager.scss";
+// import ModalGiamdoc from '../ManageGiamdoc/ModalGiamdoc';
+import { Nav, NavDropdown } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 
 function GiamDoc() {
@@ -61,110 +63,6 @@ function GiamDoc() {
             docTimeEnd: "01/01/2024",
             docExpire: "Khoa nội",
             docStatus: 1
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 1
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 1
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 1
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 1
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 1
-        },
-        {
-            docName: "Khoa nội",
-            docDes: "Mô tả văn bản 1",
-            docTimeStart: "10/10/2023",
-            docTimeEnd: "01/01/2024",
-            docExpire: "Khoa nội",
-            docStatus: 0
         }
 
     ]
@@ -177,49 +75,64 @@ function GiamDoc() {
     const [lstGiamdoc, setListGiamdoc] = useState(listGiamdoc);
 
 
-    const approveDocument = () => {
-        // 1. Cập nhật trạng thái của văn bản thành "Đã xử lý"
-        const updatedListGiamdoc = lstGiamdoc.map(item => {
-            if (item.docStatus === 0) {
-                return {
-                    ...item,
-                    docStatus: 1,
-                };
 
-            }
-            return item;
-
-        });
-        setListGiamdoc(updatedListGiamdoc); // 2. Cập nhật danh sách văn bản
-        setIsShowModalGiamDoc(false);
-        // setDocStatus(1)
-    }
-
-    const btnInActiveModalBrowseGD = () => {
-        setIsShowModalGiamDoc(false);
-    }
-
-    const btnApprove = (listGiamdoc) => {
-        setActionModalGiamDoc("BROWSE");
-        setDataModalGiamDoc(listGiamdoc);
-        setIsShowModalGiamDoc(true);
-    }
-
-    const btnHandOver = () => {
-        setActionModalGiamDoc("HANDOVER");
-        setIsShowModalGiamDoc(true);
-    }
 
     return (
-        <div>
-            <div className='table-index'>
+        <div className='grid-container'>
+            <div className="sidebar item2 ">
+                <div className='first-menu'>
+                    <h4>Danh mục</h4>
+                    <div>
+                        <ul>
+                            <li>Công việc đã giao</li>
+                            <li>Đã hoàn thành</li>
+                            <li>Tất cả công việc</li>
+                            <li>Tasks</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className='second-menu'>
+                    <h4>Danh sách nhóm</h4>
+                    <div>
+                        <ul>
+                            <li>Tạo nhóm</li>
+                            <li>Team 1
+                                <ul className='dropdown'>
+                                    <li>Nguyễn Văn A</li>
+                                    <li>Nguyễn Văn B</li>
+                                    <li>Nguyễn Văn A</li>
+                                    <li>Nguyễn Văn A</li>
+                                </ul>
+                            </li>
+                            <li>Team 2
+                                <ul className='dropdown'>
+                                    <li>Nguyễn Văn A</li>
+                                    <li>Nguyễn Văn B</li>
+                                    <li>Nguyễn Văn A</li>
+                                    <li>Nguyễn Văn A</li>
+                                </ul>
+                            </li>
+                            <li>Team 3
+                                <ul className='dropdown'>
+                                    <li>Nguyễn Văn A</li>
+                                    <li>Nguyễn Văn B</li>
+                                    <li>Nguyễn Văn A</li>
+                                    <li>Nguyễn Văn A</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div><hr /></div>
+            </div>
+            <div className='table-index item3'>
                 <div className='container mt-3'>
                     <div className='user-body'>
                         <h3 className="row text-primary text-uppercase mb-3">Danh sách văn bản</h3>
                         <div className="row">
                             {user && user.account.departmentId === 3 ?
                                 <div className='actions'>
-                                    <button className='btn btn-primary mb-3 add-user' onClick={() => btnApprove()}>
+                                    <button className='btn btn-primary mb-3 add-user' >
                                         <i className="fa fa-plus i-add"></i>Duyệt văn bản
                                     </button>
                                 </div>
@@ -254,7 +167,7 @@ function GiamDoc() {
                                                     </td>
                                                     <td>
                                                         {itemGiamdocList.docStatus === 0 ? (
-                                                            <button className="btn btn-success" onClick={() => btnApprove(itemGiamdocList)}> Duyệt <i className="fa-solid fa-check text-white"></i></button>
+                                                            <button className="btn btn-success"> Duyệt <i className="fa-solid fa-check text-white"></i></button>
                                                         ) : (
                                                             <button className="btn btn-secondary disabled"> Đã duyệt <i className="fa-solid fa-check text-white"></i></button>
                                                         )}
@@ -271,15 +184,6 @@ function GiamDoc() {
                     </div>
                 </div>
             </div>
-
-            <ModalGiamdoc
-                active={isShowModalGiamDoc}
-                inactive={btnInActiveModalBrowseGD}
-                action={actionModalGiamDoc}
-                setDataModalGiamDoc={dataModalGiamDoc}
-                approveDocument={approveDocument}
-                dataModalGiamDoc={dataModalGiamDoc}
-            />
         </div>
     );
 }

@@ -8,7 +8,6 @@ import { DatePicker } from 'antd';
 import moment from 'moment'
 import './ModalGiamDoc.scss'
 
-const { RangePicker } = DatePicker;
 
 
 function ModalGiamdoc(props) {
@@ -18,13 +17,14 @@ function ModalGiamdoc(props) {
         docDes: '',
         docTimeStart: '',
         docTimeEnd: '',
-        docExpire: '',
+        docHandOver: '',
         docStatus: '',
         docFile: []
     }
 
     const [giamdocDataDefault, setGiamDocDataDefault] = useState(listGiamdoc);
     const [dateRange, setDateRange] = useState([]);
+    const [value, setValue] = useState();
 
 
     const handleApprove = () => {
@@ -43,23 +43,21 @@ function ModalGiamdoc(props) {
         _giamdocDataDefault[inputName] = value;
         setGiamDocDataDefault(_giamdocDataDefault);
     }
+    // useEffect(() => {
+    //     if (props.active) {
+    //         setGiamDocDataDefault(props.setDataModalGiamDoc);
 
-    useEffect(() => {
-        if (props.active) {
-            setGiamDocDataDefault(props.setDataModalGiamDoc);
-
-            // Convert docTimeStart and docTimeEnd to moment objects
-            if (
-                props.setDataModalGiamDoc &&
-                props.setDataModalGiamDoc.docTimeStart &&
-                props.setDataModalGiamDoc.docTimeEnd
-            ) {
-                const startDate = moment(props.setDataModalGiamDoc.docTimeStart);
-                const endDate = moment(props.setDataModalGiamDoc.docTimeEnd);
-                setDateRange([startDate, endDate]);
-            }
-        }
-    }, [props.active, props.setDataModalGiamDoc]);
+    //         if (
+    //             props.setDataModalGiamDoc &&
+    //             props.setDataModalGiamDoc.docTimeStart &&
+    //             props.setDataModalGiamDoc.docTimeEnd
+    //         ) {
+    //             const startDate = moment(props.setDataModalGiamDoc.docTimeStart);
+    //             const endDate = moment(props.setDataModalGiamDoc.docTimeEnd);
+    //             setDateRange([startDate, endDate]);
+    //         }
+    //     }
+    // }, [props.active, props.setDataModalGiamDoc]);
 
     return (
         <>
@@ -83,32 +81,9 @@ function ModalGiamdoc(props) {
                                         />
                                     </div>
                                     <div className="mb-3 col-sm-4 form-group">
-                                        <label htmlFor="userName" className="form-label">Thời hạn xử lý</label>
-                                        <RangePicker
-                                            value={dateRange}
-                                            onChange={(dates) => {
-                                                if (dates) {
-                                                    setDateRange(dates);
-
-                                                    // Update docTimeStart and docTimeEnd in giamdocDataDefault
-                                                    const [startDate, endDate] = dates;
-                                                    setGiamDocDataDefault((prevData) => ({
-                                                        ...prevData,
-                                                        docTime: {
-                                                            docTimeStart: startDate ? startDate.format('YYYY-MM-DD') : '',
-                                                            docTimeEnd: endDate ? endDate.format('YYYY-MM-DD') : '',
-                                                        },
-                                                    }));
-                                                } else {
-                                                    toast.warning("Không thể xóa")
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="mb-3 col-sm-4 form-group">
                                         <label htmlFor="userName" className="form-label">Bàn giao</label>
                                         <input disabled="" type="text" className="form-control" id="date" name="datehandle"
-                                            value={giamdocDataDefault.docExpire}
+                                            value={giamdocDataDefault.docHandOver}
                                             onChange={(event) => { handleOnchangeForm(event.target.value, "docExpire") }}
                                         />
                                     </div>
@@ -117,6 +92,20 @@ function ModalGiamdoc(props) {
                                         <input type="file" name="document" id="doc" className="form-control" accept="application/pdf" multiple
 
                                         />
+                                    </div>
+                                    <div className="deadline-tb mb-3 form-group " style={{ width: 500 }}>
+                                        <label htmlFor="userName" className="form-label">Thời hạn xử lý</label>
+                                        <div className='Datepicker'>
+                                            <DatePicker label="Uncontrolled picker"
+                                                placeholder='Chọn ngày bắt đầu...'
+                                                value={value}
+                                                onChange={(newValue) => setValue(newValue)}
+                                            />
+                                            <DatePicker
+                                                label="Controlled picker"
+                                                placeholder='Chọn ngày kết thúc...'
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 

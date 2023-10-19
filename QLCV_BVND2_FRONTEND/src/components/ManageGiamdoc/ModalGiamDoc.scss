@@ -3,3 +3,18 @@
     z-index: 9999;
     /* Số này cao hơn z-index mặc định của modal */
 }
+
+
+.deadline-tb {
+
+
+    .Datepicker {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .ant-picker {
+            width: 400px;
+        }
+    }
+}

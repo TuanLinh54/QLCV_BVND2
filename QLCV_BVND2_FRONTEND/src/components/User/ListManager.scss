@@ -1,0 +1,80 @@
+.item2 {
+    grid-area: menu;
+}
+
+.item3 {
+    grid-area: main;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'menu main main main main main';
+
+    /* Hide the default scrollbar for WebKit-based browsers (Chrome, Safari) */
+    .sidebar::-webkit-scrollbar {
+        width: 0.1rem;
+        /* Set this to a very small width */
+    }
+
+    /* Style the thumb (draggable part) of the scrollbar */
+    .sidebar::-webkit-scrollbar-thumb {
+        background: transparent;
+        /* Make the thumb transparent */
+    }
+
+    /* For Firefox */
+    .sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+    }
+
+    /* Ensure the sidebar content can still scroll */
+    .sidebar {
+        overflow-y: scroll;
+        /* Set a fixed height or max-height to allow scrolling */
+        max-height: 100%;
+    }
+
+    .sidebar {
+        width: 230px;
+        top: 72px;
+        left: 0;
+        height: 100%;
+        background-color: #d1cdcd;
+        color: #000;
+        // overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+
+        li {
+            padding: 10px 0;
+            cursor: pointer;
+        }
+
+        .first-menu {
+            flex: 0;
+        }
+
+        .second-menu {
+            flex: 1;
+
+            ul {
+                padding-left: 0;
+            }
+
+            .dropdown {
+                padding-left: 15px;
+            }
+        }
+
+
+
+    }
+
+    .user-body {
+        margin-left: 100px;
+    }
+}

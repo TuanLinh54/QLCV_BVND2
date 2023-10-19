@@ -56,6 +56,7 @@ const Header = (props) => {
                     <NavLink to="/list_user" className="nav-link">Người dùng</NavLink>
                     <NavLink to="/list_doc" className="nav-link">Văn bản</NavLink>
                     <NavLink to="/list_giamdoc" className="nav-link">Giám đốc</NavLink>
+                    <NavLink to="/list_truongphong" className="nav-link">Trưởng phòng</NavLink>
                   </>
                   :
                   <>

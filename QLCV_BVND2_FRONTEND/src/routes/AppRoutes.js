@@ -20,6 +20,7 @@ import Header from "../components/Nav/Header";
 import { useEffect, useState } from "react";
 import _ from 'lodash';
 import Sidebar from "../components/Nav/Sidebar";
+import ListManager from "../components/User/ListManger";
 
 const AppRoutes = (props) => {
   return (
@@ -44,6 +45,7 @@ const AppRoutes = (props) => {
           <PrivateRoutes path="/list_user" component={ListUser}> </PrivateRoutes>
           <PrivateRoutes path="/list_doc" component={ListDoc}></PrivateRoutes>
           <PrivateRoutes path="/list_giamdoc" component={ListGiamDoc}></PrivateRoutes>
+          <PrivateRoutes path="/list_truongphong" component={ListManager}></PrivateRoutes>
           <Route path="/login_user"> <LoginUser /></Route>
 
           <Route path="*">
